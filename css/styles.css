@@ -1,0 +1,102 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: "montserrat", "sans-serif";
+    box-sizing: border-box;
+}
+
+body
+{
+    background-color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('/images/LoginBackground.jpg') no-repeat center;
+    background-size: cover;
+}
+
+
+.container
+{
+    margin: auto;
+    background: transparent;
+    backdrop-filter: blur(20px);
+    max-width: fit-content;
+    border-radius: 20px;
+    width: 90%;
+    padding:50px;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0px 0px 12px black;
+}
+
+/* Start with registration not showing */
+#regWindow
+{
+    display: none;
+}
+
+
+
+.container input
+{
+    border: none;
+    outline: none;
+    margin: 4px;
+    padding: 6px 16px;
+    border-radius: 40px;
+    font-size: 25px;
+}
+
+.container input:focus
+{
+    box-shadow: 0px 0px 8px black;
+}
+
+
+.loginButtons
+{
+    border: none;
+    outline: none;
+    margin: 6px;
+    padding: 10px 40px;
+    background: #fa4d3a;
+    color: #fff;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+.loginButtons:hover
+{
+    box-shadow: 0px 0px 5px black;
+}
+
+
+
+#inner-title h1
+{
+    color: white;
+    font-size: 50px;
+    text-shadow: 1px 2px 7px #222;
+    margin-bottom: 7px;
+}
+
+#signup #back-login p
+{
+    font-size: 15px;
+}
+
+p a
+{
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+p a:hover
+{
+    text-decoration: underline;
+}
