@@ -9,13 +9,14 @@
 <body>
 
     <div class="container" id="loginWindow">
-        <div class="login">
+        <div class="login" id="inputBox">
             <form action="">
                 <div id="inner-title">
                     <h1>Welcome</h1>
                 </div>
                 <input type="text" id="loginName" placeholder="Username" required/><br>
-                <input type="password" id="loginPassword" placeholder="Password" required/><br>
+                <input type="password" id="loginPassword" placeholder="Password" required/>
+                <img src="/images/eye-close.png" id="showPasswordLogin"><br>
                 <button type="button" id="loginButton" class="loginButtons" onclick=";"> Login </button>
                 <div id="signup">
                     <p>Don't have an account? <a href='#' id="registerLink">Register</a></p>
@@ -25,13 +26,16 @@
     </div>
 
     <div class="container" id="regWindow">
-        <div class="register">
+        <div class="register" id="inputBox">
             <form action="">
                 <div id="inner-title">
                     <h1>Sign Up</h1>
                 </div>
                 <input type="text" id="loginName" placeholder="Username" required/><br>
-                <input type="password" id="loginPassword" placeholder="Password" required/><br>
+                <input type="password" id="regPassword" placeholder="Password" required/>
+                <img src="/images/eye-close.png" id="showPasswordReg"><br>
+                <input type="text" id="email" placeholder="Email Address" required/><br>
+                <input type="text" id="phoneNum" placeholder="Phone Number" required/><br>
                 <button type="button" id="registerButton" class="loginButtons" onclick=";"> Register </button>
                 <div id="back-login">
                     <p>Already have an account? <a href='#' id="loginLink">Login</a></p>
