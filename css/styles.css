@@ -10,11 +10,19 @@ body
 {
     background-color: #222;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background: url('/images/LoginBackground.jpg') no-repeat center;
     background-size: cover;
+}
+
+.logOut button
+{
+    position:absolute;
+    margin: 12px auto;
+    left: 25px;
 }
 
 
@@ -38,19 +46,7 @@ body
     display: none;
 }
 
-
-
-/* .container input
-{
-    border: none;
-    outline: none;
-    margin: 4px;
-    padding: 6px 16px;
-    border-radius: 40px;
-    font-size: 25px;
-} */
-
-#inputBox input
+.inputBox input
 {
     border: none;
     outline: none;
@@ -60,7 +56,7 @@ body
     font-size: 25px;
 }
 
-#inputBox img
+.inputBox img
 {
     position: absolute;
     width: 35px;
@@ -91,6 +87,26 @@ body
 .loginButtons:hover
 {
     box-shadow: 0px 0px 5px black;
+}
+
+.inputAdd
+{
+    display:inline-block;
+    text-align: center;
+    margin: 12px;
+    padding: 12px;
+    border-radius: 25px;
+    background: transparent;
+}
+
+.inputAdd input
+{
+    position: relative;
+    border: none;
+    outline:none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin: 2px;
 }
 
 

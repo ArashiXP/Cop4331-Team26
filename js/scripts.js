@@ -44,3 +44,13 @@ eyeIconReg.addEventListener('click', ()=> {
     }
 
 });
+
+function doLogin()
+{
+    location.href = "contacts.html";
+}
+
+function doLogout()
+{
+    location.href = "index.html";
+}

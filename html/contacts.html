@@ -3,9 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Contact Manager</title>
 </head>
 <body>
+    <div class="logOut">
+        <button type="button" id="logoutButton" class="loginButtons" onclick="doLogout()">Logout</button>
+    </div>
+    <div class="container">
+        <div class="inputBox" id="searchBox">
+            <input type="text" placeholder="Search For Name" autocomplete="off">
+            <!-- <button type="button" onclick=""></button> -->
+        </div>
+
+        <div class="inputAdd" id="addName">
+            <input type="text" placeholder="First Name" autocomplete="off">
+            <input type="text" placeholder="Last Name" autocomplete="off">
+            <input type="email" id="email" placeholder="Email Address" required/>
+            <input type="tel" id="phoneNum" placeholder="Phone Number" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxlength="12" required/><br>
+        </div>
+    </div>
     
 </body>
+
+<script src="/js/scripts.js"></script>
 </html>

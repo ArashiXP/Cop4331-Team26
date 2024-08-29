@@ -9,7 +9,7 @@
 <body>
 
     <div class="container" id="loginWindow">
-        <div class="login" id="inputBox">
+        <div id="login" class="inputBox">
             <form action="">
                 <div id="inner-title">
                     <h1>Welcome</h1>
@@ -17,7 +17,7 @@
                 <input type="text" id="loginName" placeholder="Username" required/><br>
                 <input type="password" id="loginPassword" placeholder="Password" required/>
                 <img src="/images/eye-close.png" id="showPasswordLogin"><br>
-                <button type="button" id="loginButton" class="loginButtons" onclick=";"> Login </button>
+                <button type="button" id="loginButton" class="loginButtons" onclick="doLogin()"> Login </button>
                 <div id="signup">
                     <p>Don't have an account? <a href='#' id="registerLink">Register</a></p>
                 </div>
@@ -26,7 +26,7 @@
     </div>
 
     <div class="container" id="regWindow">
-        <div class="register" id="inputBox">
+        <div id="register" class="inputBox">
             <form action="">
                 <div id="inner-title">
                     <h1>Sign Up</h1>
