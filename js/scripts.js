@@ -8,8 +8,6 @@ const registerLink = document.querySelector('#registerLink');
 let userId = 0;
 let firstName = "";
 let lastName = "";
-let email = "";
-let phoneNumber = "";
 
 registerLink.addEventListener('click', ()=> {
     document.getElementById('regWindow').style.display = 'block';
@@ -140,10 +138,6 @@ function readCookie()
 	{
 		window.location.href = "index.html";
 	}
-	else
-	{
-//		document.getElementById("userName").innerHTML = "Logged in as " + firstName + " " + lastName;
-	}
 }
 
 function doLogout()
@@ -153,4 +147,66 @@ function doLogout()
 	lastName = "";
 	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 	window.location.href = "index.html";
+}
+
+function doRegister()
+{
+    firstName = document.getElementById("firstName").value;
+    lastName = document.getElementById("lastName").value;
+    let login = document.getElementById("regUser").value;
+	let password = document.getElementById("regPassword").value;
+
+	document.getElementById("loginResult").innerHTML = "";
+
+	let tmp = {firstName: firstName,lastName: lastName,login:login,password: password}
+	let jsonPayload = JSON.stringify(tmp);
+
+	let url = urlBase + "/Register." + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	try {
+        xhr.onreadystatechange = function () {
+
+            if (this.readyState != 4) {
+                return;
+            }
+
+            if (this.status == 409) {
+                document.getElementById("signupResult").innerHTML = "User already exists";
+                return;
+            }
+
+            if (this.status == 200) {
+
+                let jsonObject = JSON.parse(xhr.responseText);
+                userId = jsonObject.id;
+                document.getElementById("regResult").innerHTML = "Registration Successful!";
+                firstName = jsonObject.firstName;
+                lastName = jsonObject.lastName;
+                saveCookie();
+            }
+        };
+
+        xhr.send(jsonPayload);
+    } catch (err) {
+        document.getElementById("regResult").innerHTML = err.message;
+    }
+
+
+}
+
+function validReg(first, last, user, pass)
+{
+	if ((first == "") || (last == "") ||(user =="") || (pass == ""))
+	{
+		console.log("invalid registration");
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }
