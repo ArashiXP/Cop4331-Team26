@@ -153,7 +153,7 @@ function doRegister()
 {
     firstName = document.getElementById("firstName").value;
     lastName = document.getElementById("lastName").value;
-    let login = document.getElementById("loginName").value;
+    let login = document.getElementById("regUser").value;
 	let password = document.getElementById("regPassword").value;
 
 	document.getElementById("loginResult").innerHTML = "";
