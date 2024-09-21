@@ -1,13 +1,8 @@
-
 <?php
 
     $inData = getRequestInfo();
 
-    $id = 0;
     $userid = $inData["userid"];
-    $name = $inData["name"];
-    $phone = $inData["phone"];
-    $email = $inData["email"];
 
     $conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
     if( $conn->connect_error )
@@ -21,11 +16,22 @@
         $stmt->execute();
         $result = $stmt->get_result();
 
+        $contacts = array(); // Array to hold all contacts
+
         if( $result->num_rows > 0 ) {
             while ($row = $result->fetch_assoc())
             {
-                returnWithInfo($row['id'], $row['userid'], $row['name'], $row['phone'], $row['email']);
+                $contact = array(
+                    "id" => $row['id'],
+                    "userid" => $row['userid'],
+                    "name" => $row['name'],
+                    "phone" => $row['phone'],
+                    "email" => $row['email'],
+                    "error" => ""
+                );
+                array_push($contacts, $contact); 
             }
+            sendResultInfoAsJson(json_encode($contacts)); 
         }
         else
         {
@@ -50,13 +56,6 @@
     function returnWithError( $err )
     {
         $retValue = '{"error":"' . $err . '"}';
-        sendResultInfoAsJson( $retValue );
-    }
-
-    function returnWithInfo( $id, $userid, $name, $phone, $email )
-    {
-        $retValue = '{"id":' . $id . ',"userid":' . $userid . ',"name":"' . $name . '","phone":"' . $phone .
-            '","email":"'  . $email . '","error":""}';
         sendResultInfoAsJson( $retValue );
     }
 
