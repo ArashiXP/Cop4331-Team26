@@ -13,22 +13,23 @@
 
     <div class="inputAdd" id="addName">
         <h1>Add A New Contact</h1>
-        <input type="text" placeholder="First Name" autocomplete="off" id="contactsFName"><br>
-        <input type="text" placeholder="Last Name" autocomplete="off" id="contactsLName"><br>
-        <input type="email" id="contactsEmail" placeholder="Email Address" required/><br>
-        <input type="tel" id="contactsPhoneNum" placeholder="Phone Number" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxlength="12" required/><br>
-        <button type="button" id="addContactButton" onclick="addContacts()">Add</button>
+            <input type="text"  placeholder="First Name" autocomplete="off" id="contactsFName"><br>
+            <input type="text"  placeholder="Last Name" autocomplete="off" id="contactsLName"><br>
+            <input type="email"  id="contactsEmail" placeholder="Email Address" required/><br>
+            <input type="tel" id="contactsPhoneNum" placeholder="Phone Number" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxlength="12" required/><br>
+            <button type="button" id="addContactButton" onclick="addContacts()">Add</button>
+            <p id="addResult"></p>
     </div>
     <div class="container" id="contactsWindow">
         <div class="inputBox" id="searchBox">
             <input type="text" placeholder="Search For Name" id="searchInput" autocomplete="off">
-            <button type="button" id="searchButton"><img src="images/search.png"></button><br>
+            <button type="button" onclick="searchContacts()" id="searchButton"><img src="images/search.png"></button><br>
         </div>
 
         <div id="contactsList">
             <h1>All Your Contacts</h1>
             <button type="button" id="addButton">Add Contact</button>
-            <table class="contactsTable">
+            <table id="contactsTable">
                 <thead>
                     <tr>
                     <th>First Name</th>
@@ -37,13 +38,7 @@
                     <th>Phone Number</th>
                 </tr>
                 </thead>
-                <tbody>
-                    <!-- <tr>
-                        <td id = "listFirst">test</td>
-                        <td id = "listLast">guy</td>
-                        <td id = "listEmail">test@gmail.com</td>
-                        <td id = "listPhone">123-456-7890</td>
-                    </tr> -->
+                <tbody id="listContacts">
                 </tbody>
             </table>
         </div>
