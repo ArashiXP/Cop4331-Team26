@@ -1,4 +1,4 @@
-const urlBase = 'http://165.227.203.121/LAMPAPI';
+const urlBase = 'http://cop4331-26.com/LAMPAPI';
 const extension = 'php';
 
 const container = document.querySelector('.container');
@@ -233,7 +233,6 @@ if(searchButton)
 
 searchButton.addEventListener('click', ()=>{
 	console.log(userId);
-	printText();
 });
 
 nameSearch.addEventListener('keydown', ()=> {
@@ -242,9 +241,20 @@ nameSearch.addEventListener('keydown', ()=> {
 });
 
 addContactButton.addEventListener('click', ()=> {
+	openContactsAdd();
+});
+
+function openContactsAdd()
+{
 	document.getElementById('addName').style.display = 'block';
 	document.getElementById('contactsWindow').style.display = 'none';
-});
+}
+
+function closeContactsAdd()
+{
+	document.getElementById('addName').style.display = 'none';
+	document.getElementById('contactsWindow').style.display = 'block';
+}
 
 function addContacts()
 {
@@ -279,11 +289,9 @@ function addContacts()
     try {
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                // reload contacts table and switch view to show
                 showContacts();
-				document.getElementById('addName').style.display = 'none';
-				document.getElementById('contactsWindow').style.display = 'block';
 				clearText();
+				closeContactsAdd();
 				console.log("added: " + name, email, phone,userId);
             }
         };
@@ -294,12 +302,19 @@ function addContacts()
 
 }
 
+function minimise()
+{
+	closeContactsAdd();
+	clearText();
+}
+
 function clearText() 
 {
 	document.getElementById('contactsFName').value = '';
 	document.getElementById('contactsLName').value = '';
 	document.getElementById('contactsEmail').value = '';
 	document.getElementById('contactsPhoneNum').value = '';
+	document.getElementById('addResult').innerHTML = '';
 }
 
 function showContacts()
@@ -330,13 +345,16 @@ function showContacts()
 						let splitName = jsonObject[i].name.split(" ");
 						let fName = splitName[0];
 						let lName = splitName[1];
-						// console.log("This is split: " + fName + " " + lName);
-						// allIds[i] = ObjejsonObject.length[i].ID
+						// console.log(fName + " " + lName + " id = " + jsonObject[i].id);
+						allIds[i] = jsonObject[i].id;
 						collection += "<tr>"
 						collection += "<td id = \"listFirst" + i +  "\"><span>" + fName + "</span></td>"
 						collection += "<td id = \"listLast" + i +  "\"><span>" + lName + "</span></td>"
 						collection += "<td id = \"listEmail" + i +  "\"><span>" + jsonObject[i].email + "</span></td>"
 						collection += "<td id = \"listPhone" + i +  "\"><span>" + jsonObject[i].phone + "</span></td>"
+						collection += "<td><button type = \"button\" id=\"deleteButton\" onclick=\"deleteContact(" + i + ")\"><img src=\"/images/x.png\" id=\"whiteX\">" + "</button>";
+						collection += "<button type = \"button\" class=\"editing\" onclick=\"editContact(" + i + ")\" id=\"editContact" + i + "\"><img src=\"/images/Write.png\" id=\"editImg\">" + "</button>";
+						collection += "</td>";
 						collection += "</tr>"
 					}
 					collection += "</table>"
@@ -384,6 +402,99 @@ function searchContacts()
 		}
 	}
 }
+
+function deleteContact(rowNum)
+{
+	let ID = allIds[rowNum]
+	let contact = {id:ID};
+	let jsonPayload = JSON.stringify(contact);
+	let url = urlBase + "/DeleteContacts." + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try {
+		xhr.onreadystatechange = function () {
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				showContacts();
+				if(rowNum == 0)
+				{
+					location.reload();
+				}
+
+			}
+		};
+		xhr.send(jsonPayload);
+	} catch (err) {
+		console.log(err.message);
+	}
+
+}
+
+function editContact(rowNum)
+{
+	let ID = allIds[rowNum];;
+	document.getElementById("editContact" + rowNum).innerHTML = "<button type = \"button\" class=\"editing\" onclick=\"saveContact(" + rowNum + ")\" id=\"saveContact" + rowNum + "\"><img src=\"/images/checked.png\" id=\"saveImg\">" + "</button>";
+	let firstName = document.getElementById("listFirst" + rowNum);
+	let lastName = document.getElementById("listLast" + rowNum);
+	let email = document.getElementById("listEmail" + rowNum);
+	let phone = document.getElementById("listPhone" + rowNum);
+
+	let oldFirst = firstName.innerText;
+	let oldLast = lastName.innerText;
+	let oldEmail = email.innerText;
+	let oldPhone = phone.innerText;
+
+	firstName.innerHTML = "<input type=\"text\" class=\"editInput\" id=\"newFirst" + rowNum + "\"value=\"" + oldFirst + "\">";
+	lastName.innerHTML = "<input type=\"text\" class=\"editInput\" id=\"newLast" + rowNum + "\"value=\"" + oldLast + "\">"; "\">";
+	email.innerHTML = "<input type=\"text\" class=\"editInput\" id=\"newEmail" + rowNum + "\"value=\"" + oldEmail + "\">"; "\">";
+	phone.innerHTML = "<input type=\"text\" class=\"editInput\" id=\"newPhone" + rowNum + "\"value=\"" + oldPhone + "\">"; "\">";
+}
+
+function saveContact(rowNum)
+{
+	let ID = allIds[rowNum];
+	console.log("saving ID: " + ID);
+	document.getElementById("saveContact" + rowNum).innerHTML = "<button type = \"button\" class=\"editing\" onclick=\"editContact(" + rowNum + ")\" id=\"editContact" + rowNum + "\"><img src=\"/images/Write.png\" id=\"editImg\">" + "</button>";
+
+	let newFirst = document.getElementById("newFirst" + rowNum).value;
+	let newLast = document.getElementById("newLast" + rowNum).value;
+	let newEmail = document.getElementById("newEmail" + rowNum).value;
+	let newPhone = document.getElementById("newPhone" + rowNum).value;
+
+	let newName = newFirst + ' ' + newLast
+
+	console.log("new name: " + newName);
+	console.log("new phone: " + newPhone);
+	console.log("new email: " + newEmail);
+
+	let updatedContact = {userid: userId, contactid: ID, name: newName, phone: newPhone,email: newEmail};
+
+	let jsonPayload = JSON.stringify(updatedContact);
+
+	let url = urlBase + '/EditContacts.' + extension;
+
+
+	let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) 
+			{
+                showContacts();
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch (err) {
+		console.log(err.message);
+    }
+      
+
+}
+
+
 
 function validContact(first, last, email, phone)
 {

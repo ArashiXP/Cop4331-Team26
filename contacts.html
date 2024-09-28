@@ -13,11 +13,12 @@
 
     <div class="inputAdd" id="addName">
         <h1>Add A New Contact</h1>
+            <button type="button" id="closeButton" onclick="minimise()"><img src="/images/x.png" id="closeAdd"></button><br>
             <input type="text"  placeholder="First Name" autocomplete="off" id="contactsFName"><br>
             <input type="text"  placeholder="Last Name" autocomplete="off" id="contactsLName"><br>
             <input type="email"  id="contactsEmail" placeholder="Email Address" required/><br>
             <input type="tel" id="contactsPhoneNum" placeholder="Phone Number" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxlength="12" required/><br>
-            <button type="button" id="addContactButton" onclick="addContacts()">Add</button>
+            <button type="button" class="loginButtons" onclick="addContacts()">Add</button>
             <p id="addResult"></p>
     </div>
     <div class="container" id="contactsWindow">
@@ -27,7 +28,9 @@
         </div>
 
         <div id="contactsList">
-            <h1>All Your Contacts</h1>
+            <div id="inner-title">
+                <h1>All Your Contacts</h1>
+            </div>
             <button type="button" id="addButton">Add Contact</button>
             <table id="contactsTable">
                 <thead>
@@ -36,6 +39,7 @@
                     <th>Last Name</th>
                     <th>Email Address</Address></th>
                     <th>Phone Number</th>
+                    <th><p></p></th>
                 </tr>
                 </thead>
                 <tbody id="listContacts">

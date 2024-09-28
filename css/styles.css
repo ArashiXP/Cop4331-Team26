@@ -87,7 +87,7 @@ body
 {
     position: absolute;
     width: 35px;
-    top: 181px;
+    top: 169px;
     right:65px;
     cursor: pointer;
 }
@@ -117,7 +117,7 @@ body
 }
 
 
-.container input:focus
+.container input:focus, .inputAdd input:focus
 {
     box-shadow: 0px 0px 8px black;
 }
@@ -136,7 +136,7 @@ body
     border-radius: 25px;
 }
 
-.loginButtons:hover
+.loginButtons:hover,#contactsList #addButton button:hover
 {
     box-shadow: 0px 0px 5px black;
 }
@@ -164,6 +164,12 @@ body
     padding: 8px 16px;
     border-radius: 20px;
     margin: 6px;
+    font-size: 20px;
+}
+
+.inputAdd button
+{
+    font-size:18px;
 }
 
 #contactsTable
@@ -206,20 +212,20 @@ body
 #inner-title h1
 {
     color: white;
-    font-size: 50px;
+    font-size: 40px;
     text-shadow: 1px 2px 7px #222;
     margin-bottom: 7px;
 }
 
-.inputAdd, #contactsList h1
+.inputAdd
 {
     color: white;
-    font-size:20px;
+    font-size:16px;
     text-shadow: 1px 2px 7px #222;
-    margin-bottom: 7px;
+    margin-bottom: 4px;
 }
 
-#contactsList button, .inputAdd button
+#contactsList button
 {
     border: none;
     outline: none;
@@ -247,4 +253,56 @@ p a
 p a:hover
 {
     text-decoration: underline;
+}
+
+#contactsTable #whiteX
+{
+    width:25px;
+    height:25px;
+}
+
+#contactsTable #deleteButton, #contactsTable .editing
+{
+    background: transparent;
+}
+
+#contactsTable #editImg
+{
+    position: relative;
+    top:8px;
+    width: 45px!important;
+    height: 45px!important;
+}
+
+#contactsTable #saveImg
+{
+    /* display: none; */
+    width: 25px!important;
+    height: 25px!important;
+}
+
+#addName #closeAdd
+{
+    position:absolute;
+    right:20px;
+    top:14px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+#addName #closeButton
+{
+    background: transparent;
+}
+
+.editInput
+{
+    position: relative;
+    border: none;
+    outline:none;
+    padding: 2px 10px;
+    border-radius: 20px;
+    /* margin: 1px; */
+    font-size: 14px;
 }
